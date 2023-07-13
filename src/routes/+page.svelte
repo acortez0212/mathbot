@@ -1,5 +1,4 @@
 
-
 <script lang="ts">
   import ChatMessage from '@components/chat-message.svelte';
   import Debug from '@components/debug.svelte';
@@ -9,11 +8,16 @@
   import { chats } from '@stores';
   import { onMount } from 'svelte';
   import { MathfieldElement } from 'mathlive';
+  import mathfield from './mathfield.svelte';
+  import { math, display } from 'mathlifier';
+
 
   
 
   let elemChat: HTMLElement;
   let currentMessage = '';
+
+
   $: updateOperation = chats.getOperation($chats.chat.id, EntityOperationType.UPDATE);
 
   function scrollChatBottom(behavior?: ScrollBehavior): void {
@@ -90,7 +94,9 @@
     <!-- #region Prompt -->
     <section class="border-t border-surface-500/30 p-4">
       <div class="input-group input-group-divider grid-cols-[auto_80px] rounded-container-token">
-        <textarea
+
+        
+         <textarea
         bind:value={currentMessage}
         class="bg-transparent border-0 ring-0 min-h-[40px]"
         name="prompt"
@@ -100,7 +106,8 @@
         style="background-color: rgba(0,0,0,0.5);color:#ffffff;"
 
         on:keydown={onPromptKeydown}
-        />
+        /> 
+        
         <!--   bind:value={currentMessage}
           class="bg-transparent border-0 ring-0 min-h-[40px]"
           name="prompt"

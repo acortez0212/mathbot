@@ -3,6 +3,7 @@
   import { Debug } from '@components';
   import { Role, type Message } from '@shared';
   import { Avatar } from '@skeletonlabs/skeleton';
+  import { math, display } from 'mathlifier';
 
   export let message: Message;
   export let index: number;

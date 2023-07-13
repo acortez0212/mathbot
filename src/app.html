@@ -2,6 +2,7 @@
 <html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
+    
     <link rel="icon" href="%sveltekit.assets%/favicon.png" />
     <meta name="viewport" content="width=device-width" />
     <title>MathBot</title>
@@ -10,4 +11,6 @@
   <body data-sveltekit-preload-data="hover" data-theme="crimson">
     <div style="display: contents" class="h-full overflow-hidden">%sveltekit.body%</div>
   </body>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
 </html>
