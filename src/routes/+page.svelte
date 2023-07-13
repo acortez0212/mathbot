@@ -8,7 +8,7 @@
   import { chats } from '@stores';
   import { onMount } from 'svelte';
   import { MathfieldElement } from 'mathlive';
-  import mathfield from './mathfield.svelte';
+  import Mathfield from '../lib/client/components/Mathfield.svelte';
   import { math, display } from 'mathlifier';
 
 
@@ -95,17 +95,13 @@
     <section class="border-t border-surface-500/30 p-4">
       <div class="input-group input-group-divider grid-cols-[auto_80px] rounded-container-token">
 
-        
-         <textarea
+         <Mathfield
         bind:value={currentMessage}
-        class="bg-transparent border-0 ring-0 min-h-[40px]"
         name="prompt"
         id="prompt"
         placeholder="Write a message..."
         rows="1"
         style="background-color: rgba(0,0,0,0.5);color:#ffffff;"
-
-        on:keydown={onPromptKeydown}
         /> 
         
         <!--   bind:value={currentMessage}
