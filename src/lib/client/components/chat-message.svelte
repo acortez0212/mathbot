@@ -1,16 +1,19 @@
 <script lang="ts">
   import { markdown } from '@client/services';
+  import katex from 'katex';
   import { Debug } from '@components';
   import { Role, type Message } from '@shared';
   import { Avatar } from '@skeletonlabs/skeleton';
   import { math, display } from 'mathlifier';
-
+  import { Marked } from '@ts-stack/markdown';
   export let message: Message;
   export let index: number;
   export let deleteMessage: (index: number) => void;
 
   let showDetails = false;
 </script>
+
+
 
 {#if message.role === Role.USER}
   <div class="card p-4 rounded-md space-y-2 variant-ghost-surface">
@@ -66,7 +69,8 @@
       </button>
     </header>
     <div class="message overflow-auto">
-      {@html markdown(message.content)}
+
+      {@html Marked.parse(message.content)}
     </div>
   </div>
 {/if}

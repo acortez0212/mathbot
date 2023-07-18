@@ -29,6 +29,8 @@ declare global {
     };
   }
 }
+declare module 'texme';
+
 
 // THIS IS IMPORTANT!!!
 export {};
