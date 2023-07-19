@@ -10,13 +10,28 @@
   import { MathfieldElement } from 'mathlive';
   import  Mathfield from '../lib/client/components/Mathfield.svelte';
   import { math, display } from 'mathlifier';
-
-
+  import { convertLatexToMarkup } from 'mathlive';
   
 
   let elemChat: HTMLElement;
-  let currentMessage = '';
- 
+  let currentMessage = 'ㅤ';
+
+  // let mfe = new MathfieldElement();
+  
+  // document.body.appendChild(mfe);
+onMount(() => {
+  
+  const mf = document.getElementById('mf');
+
+      mf.addEventListener('input', (evt) => {
+        document.getElementById('latex').value = mf.getValue();
+      });
+
+      document.getElementById('latex').addEventListener('input', (ev) => {
+        mf.setValue(ev.target.value);
+      });
+    }
+);
 
   $: updateOperation = chats.getOperation($chats.chat.id, EntityOperationType.UPDATE);
 
@@ -95,14 +110,21 @@
     <section class="border-t border-surface-500/30 p-4">
       <div class="input-group input-group-divider grid-cols-[auto_80px] rounded-container-token">
 
-        <textarea
-        rows="1"
-        bind:value={currentMessage}
-        name="prompt"
-        id="prompt"
-        placeholder="Write a message..."
-        style="background-color: rgba(0,0,0,0.5);color:#ffffff;"
-        /> 
+       <math-field id="mf"
+       on:keydown={onPromptKeydown} >
+
+       </math-field>
+
+       <textarea 
+         bind:value={currentMessage}
+          id="latex"
+          name="prompt"
+          rows="1"
+          on:keydown={onPromptKeydown}
+          class="output bg-transparent border-0 ring-0 min-h-[40px]"
+          />
+
+        
         <!--   bind:value={currentMessage}
           class="bg-transparent border-0 ring-0 min-h-[40px]"
           name="prompt"
@@ -121,3 +143,4 @@
     <!-- #endregion -->
   </div>
 </section>
+
