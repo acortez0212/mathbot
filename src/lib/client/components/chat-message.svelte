@@ -6,11 +6,18 @@
   import { Avatar } from '@skeletonlabs/skeleton';
   import { math, display } from 'mathlifier';
   import { Marked } from '@ts-stack/markdown';
+  import MarkdownIt from "markdown-it";
+  import MkdKatex from "@littlefattie/markdown-it-katex";
   export let message: Message;
   export let index: number;
   export let deleteMessage: (index: number) => void;
 
   let showDetails = false;
+
+  const mkd = MarkdownIt();
+
+
+  
 </script>
 
 
@@ -70,7 +77,7 @@
     </header>
     <div class="message overflow-auto">
 
-      {@html Marked.parse(message.content)}
+      {@html mkd.render(message.content)}
     </div>
   </div>
 {/if}

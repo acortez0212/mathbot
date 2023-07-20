@@ -14,7 +14,7 @@
   
 
   let elemChat: HTMLElement;
-  let currentMessage = 'ㅤ';
+  let currentMessage = '';
 
   // let mfe = new MathfieldElement();
   
@@ -25,11 +25,12 @@ onMount(() => {
 
       mf.addEventListener('input', (evt) => {
         document.getElementById('latex').value = mf.getValue();
+        document.getElementById('latex').dispatchEvent(new Event('input'));
       });
 
-      document.getElementById('latex').addEventListener('input', (ev) => {
+       document.getElementById('latex').addEventListener('input', (ev) => {
         mf.setValue(ev.target.value);
-      });
+       });
     }
 );
 
