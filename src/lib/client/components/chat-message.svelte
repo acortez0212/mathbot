@@ -1,5 +1,6 @@
 <script lang="ts">
   import { markdown } from '@client/services';
+  import { renderMathInElement } from 'mathlive';
   import katex from 'katex';
   import { Debug } from '@components';
   import { Role, type Message } from '@shared';
@@ -8,6 +9,10 @@
   import { Marked } from '@ts-stack/markdown';
   import MarkdownIt from "markdown-it";
   import MkdKatex from "@littlefattie/markdown-it-katex";
+  import { onMount } from 'svelte'
+  import { afterUpdate } from 'svelte';
+  import { beforeUpdate } from 'svelte';
+;
   export let message: Message;
   export let index: number;
   export let deleteMessage: (index: number) => void;
@@ -16,7 +21,51 @@
 
   const mkd = MarkdownIt();
 
+//   function renderAfterMkd(){
 
+//     renderMathInElement("msg");
+//   }
+
+//   beforeUpdate(() => {
+
+// console.log('before');
+
+// });
+
+// afterUpdate(() => {
+// console.log('after');
+
+// });
+
+//   onMount(() => {
+
+
+//     console.log('onmount')
+//   });
+
+  	
+	onMount(() => {
+		let script = document.createElement('script');
+    script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
+    document.head.append(script);
+		
+		script.onload = () => {
+      MathJax = {
+        tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
+        svg: {fontCache: 'global'}
+      };
+		};
+		console.log("Mathjax rednered")
+	});
+
+  // Function to render math after the content is updated/rendered
+ 
+  // onMount(() => {
+
+  // renderMathInElement("msg");
+
+  // }
+  // );
   
 </script>
 
@@ -46,7 +95,7 @@
         </svg>
       </button>
     </header>
-    <div class="message overflow-auto">{message.content}</div>
+    <div class="message overflow-auto" id="usermsg">{message.content}</div>
   </div>
 {/if}
 
@@ -75,9 +124,10 @@
         </svg>
       </button>
     </header>
-    <div class="message overflow-auto">
-
-      {@html mkd.render(message.content)}
+    <div class="message overflow-auto" id="msg">
+      {@html markdown(message.content)}
+      
+      {console.log('markdown rendered')}
     </div>
   </div>
 {/if}
@@ -187,3 +237,4 @@ ${JSON.stringify(JSON.parse(message.content), null, 4)}
     {/if}
   </div>
 {/if}
+

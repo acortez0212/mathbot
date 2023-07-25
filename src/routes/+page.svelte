@@ -7,14 +7,15 @@
   import { Avatar } from '@skeletonlabs/skeleton';
   import { chats } from '@stores';
   import { onMount } from 'svelte';
-  import { MathfieldElement } from 'mathlive';
+  import { MathfieldElement, renderMathInDocument, renderMathInElement} from 'mathlive';
   import  Mathfield from '../lib/client/components/Mathfield.svelte';
   import { math, display } from 'mathlifier';
   import { convertLatexToMarkup } from 'mathlive';
-  
 
   let elemChat: HTMLElement;
   let currentMessage = '';
+
+
 
   // let mfe = new MathfieldElement();
   
@@ -76,6 +77,7 @@ onMount(() => {
   });
 </script>
 
+
 <section class="container mx-auto max-w-[800px] h-full pt-4">
   <div class="card chat w-full h-full grid grid-rows-[auto_75px]">
     <!-- #region Chat -->
@@ -112,9 +114,10 @@ onMount(() => {
       <div class="input-group input-group-divider grid-cols-[auto_80px] rounded-container-token">
 
        <math-field id="mf"
-       on:keydown={onPromptKeydown} >
+       
+       >
 
-       </math-field>
+      </math-field>
 
        <textarea 
          bind:value={currentMessage}
