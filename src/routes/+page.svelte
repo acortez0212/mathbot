@@ -18,7 +18,21 @@
 
 
   // let mfe = new MathfieldElement();
-  
+  // onMount(() => {
+	// 	let script = document.createElement('script');
+  //   script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
+  //   document.head.append(script);
+		
+	// 	script.onload = () => {
+  //     MathJax = {
+  //       tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
+  //       svg: {fontCache: 'global'}
+  //     }
+  //     ;
+	// 	};
+	// 	console.log("Mathjax rednered")
+	// } );
+
   // document.body.appendChild(mfe);
 onMount(() => {
   
@@ -114,7 +128,8 @@ onMount(() => {
       <div class="input-group input-group-divider grid-cols-[auto_80px] rounded-container-token">
 
        <math-field id="mf"
-       
+       rows="1"
+
        >
 
       </math-field>

@@ -1,15 +1,15 @@
 <script lang="ts">
   import { markdown } from '@client/services';
-  import { renderMathInElement } from 'mathlive';
-  import katex from 'katex';
+   import { renderMathInElement } from 'mathlive';
+   import katex from 'katex';
   import { Debug } from '@components';
   import { Role, type Message } from '@shared';
   import { Avatar } from '@skeletonlabs/skeleton';
   import { math, display } from 'mathlifier';
-  import { Marked } from '@ts-stack/markdown';
+   import { Marked } from '@ts-stack/markdown';
   import MarkdownIt from "markdown-it";
-  import MkdKatex from "@littlefattie/markdown-it-katex";
-  import { onMount } from 'svelte'
+   import MkdKatex from "@littlefattie/markdown-it-katex";
+  import { onMount, createEventDispatcher } from 'svelte'
   import { afterUpdate } from 'svelte';
   import { beforeUpdate } from 'svelte';
 ;
@@ -42,22 +42,14 @@
 
 //     console.log('onmount')
 //   });
+const dispatch = createEventDispatcher();
 
-  	
-	onMount(() => {
-		let script = document.createElement('script');
+
+  let script = document.createElement('script');
     script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
     document.head.append(script);
 		
-		script.onload = () => {
-      MathJax = {
-        tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
-        svg: {fontCache: 'global'}
-      };
-		};
-		console.log("Mathjax rednered")
-	});
-
+	
   // Function to render math after the content is updated/rendered
  
   // onMount(() => {
@@ -95,7 +87,8 @@
         </svg>
       </button>
     </header>
-    <div class="message overflow-auto" id="usermsg">{message.content}</div>
+    <div class="message overflow-auto" id="usermsg">{message.content}
+    </div>
   </div>
 {/if}
 
@@ -103,7 +96,7 @@
   <div class="card p-4 rounded-md space-y-2 variant-soft-tertiary max-w-full">
     <header class="flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <Avatar src="/favicon.webp" width="w-8" />
+        <Avatar src="src/lib/favicon.webp" width="w-8" />
         <p class="font-bold text-lg">MathBot</p>
         <small class="opacity-50">{message.durationMs} ms</small>
       </div>
@@ -128,6 +121,13 @@
       {@html markdown(message.content)}
       
       {console.log('markdown rendered')}
+      {
+        MathJax = {
+          tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
+          svg: {fontCache: 'global'}
+        }
+        
+      }
     </div>
   </div>
 {/if}
