@@ -129,6 +129,7 @@ onMount(() => {
 
        <math-field id="mf"
        rows="1"
+       smart-mode=on
 
        >
 

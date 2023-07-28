@@ -1,18 +1,13 @@
 <script lang="ts">
   import { markdown } from '@client/services';
-   import { renderMathInElement } from 'mathlive';
-   import katex from 'katex';
+  import Mathrender from './Mathrender.svelte';
   import { Debug } from '@components';
   import { Role, type Message } from '@shared';
   import { Avatar } from '@skeletonlabs/skeleton';
-  import { math, display } from 'mathlifier';
-   import { Marked } from '@ts-stack/markdown';
+  
   import MarkdownIt from "markdown-it";
-   import MkdKatex from "@littlefattie/markdown-it-katex";
   import { onMount, createEventDispatcher } from 'svelte'
-  import { afterUpdate } from 'svelte';
-  import { beforeUpdate } from 'svelte';
-;
+ 
   export let message: Message;
   export let index: number;
   export let deleteMessage: (index: number) => void;
@@ -87,8 +82,9 @@ const dispatch = createEventDispatcher();
         </svg>
       </button>
     </header>
-    <div class="message overflow-auto" id="usermsg">{message.content}
-    </div>
+    <!-- <div class="message overflow-auto" id="usermsg">{message.content} -->
+      <Mathrender message={'$' + message.content + '$'} id="usermsg"></Mathrender> 
+    <!-- </div> -->
   </div>
 {/if}
 
