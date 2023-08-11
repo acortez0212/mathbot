@@ -3582,7 +3582,7 @@ figcaption {
     height: 100%;
     max-width: none;
     object-fit: fill;
-    background-image: url(mathbackb.png);
+    background-image: url(/home/alanc/Downloads/wipmath/src/lib/mathbackb.png);
     background-repeat: no-repeat;
     background-size: cover;
     flex-direction: column;

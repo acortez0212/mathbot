@@ -16,6 +16,23 @@
 
   const mkd = MarkdownIt();
 
+  // onMount(() => {
+	// 	let script = document.createElement('script');
+  //   script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
+  //   document.head.append(script);
+		
+	// 	script.onload = () => {
+  //     MathJax = {
+  //       mml: { forceReparse: true } ,
+  //       tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
+  //       svg: {fontCache: 'global'}
+        
+  //     };
+	// 	};
+	// 	console.log("chat message render")
+	// });
+
+
 //   function renderAfterMkd(){
 
 //     renderMathInElement("msg");
@@ -37,13 +54,7 @@
 
 //     console.log('onmount')
 //   });
-const dispatch = createEventDispatcher();
 
-
-  let script = document.createElement('script');
-    script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js";
-    document.head.append(script);
-		
 	
   // Function to render math after the content is updated/rendered
  
@@ -82,7 +93,14 @@ const dispatch = createEventDispatcher();
         </svg>
       </button>
     </header>
-    <!-- <div class="message overflow-auto" id="usermsg">{message.content} -->
+    <!-- <div class="message overflow-auto" id="usermsg">{'$' + message.content + '$'} -->
+      <!-- {
+        MathJax = {
+          tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
+          svg: {fontCache: 'global'}
+        }
+        
+      } -->
       <Mathrender message={'$' + message.content + '$'} id="usermsg"></Mathrender> 
     <!-- </div> -->
   </div>
@@ -113,10 +131,12 @@ const dispatch = createEventDispatcher();
         </svg>
       </button>
     </header>
+    <!-- <Mathrender message={message.content} id="msg"></Mathrender> -->
     <div class="message overflow-auto" id="msg">
       {@html markdown(message.content)}
       
       {console.log('markdown rendered')}
+      
       {
         MathJax = {
           tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
@@ -124,15 +144,16 @@ const dispatch = createEventDispatcher();
         }
         
       }
+      {		console.log("chat message render")}
     </div>
   </div>
 {/if}
 
-{#if message.role === Role.ASSISTANT && message.function_call}
+<!-- {#if message.role === Role.ASSISTANT && message.function_call}
   <div class="card px-4 py-1 rounded-md space-y-2 variant-ringed-tertiary max-w-full">
     <header class="flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <Avatar src="/favicon.webp" width="w-6" />
+        <Avatar src="src/lib/favicon.webp" width="w-6" />
         <p class="font-bold text-lg">Calling function...</p>
         <small class="opacity-50">{message.durationMs} ms</small>
       </div>
@@ -168,8 +189,8 @@ const dispatch = createEventDispatcher();
       </div>
     {/if}
   </div>
-{/if}
-
+{/if} -->
+<!-- 
 {#if message.role === Role.FUNCTION}
   <div class="card px-4 py-1 rounded-md space-y-2 variant-ringed-tertiary max-w-full">
     <header class="flex justify-between items-center">
@@ -233,4 +254,4 @@ ${JSON.stringify(JSON.parse(message.content), null, 4)}
     {/if}
   </div>
 {/if}
-
+ -->
