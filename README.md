@@ -1,9 +1,10 @@
 
+![mathbotwhite](https://github.com/acortez0212/mathbot/assets/97312241/a2ad2668-dcbe-44d1-a4ff-8b61552361cd)
+
+
 ## Requirements
 
-To run the bot your'll need OpenAI API key. To deploy the bot to AWS you'll need AWS account and AWS CLI configured.
-
-[Obtain OpenAI API key here](https://platform.openai.com/account/api-keys).
+To run the bot your'll need OpenAI API key. 
 
 Put it to `.env` file:
 
